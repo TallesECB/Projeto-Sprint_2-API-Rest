@@ -49,12 +49,15 @@ router.get('/consultName/:nameClient', async (request, answer) => {
     try {
         console.log(request.params) 
         const name = request.params.nameClient
-        const client = new Client({name: name})
-        await client.consultName()
+        const results = await TableClient.consultName(name)
+
+        console.log(results)
+
         answer.status(200)
-        answer.send(
-            JSON.stringify(client)
-        )
+        answer.send (
+            results
+        ) 
+
     } catch (erro) {
         answer.send(
             JSON.stringify({
@@ -102,8 +105,8 @@ router.delete('/:idClient', async (request, answer) => {
     }
     const client = new Client(idClient)
     console.log(idClient)
+    
     await client.remove()
-
     answer.status(204)
     answer.end()
 })

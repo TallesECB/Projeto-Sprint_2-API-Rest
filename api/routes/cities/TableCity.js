@@ -1,5 +1,6 @@
 const Model = require('./ModelTabelCities')
 const instancia = require('../../database')
+const dataNotFound = require('../../errors/dataNotFound')
 
 module.exports = {
 
@@ -8,6 +9,7 @@ module.exports = {
         return Model.create(city)
     }, 
     
+
     //função não está retornando os valores corretamente, necessário verificar, se por um findOne, vai certinho, mas precisamos que seja all, 
     //pois pode ter mais de uma cidade com o mesmo nome / estado
     async consultName(name) { //consultar city pelo nome.
@@ -17,30 +19,27 @@ module.exports = {
             }, raw: true
         })
 
-        if (!result) {
-            throw new Error('Não foi encontrado cidades, com este nome')
-        }
-        const teste = JSON.stringify(result)
-        console.log(teste) //necessário executar o tratamento de dados, para concertar o erro do print dos dados, mas preciso dormir, boa noite pra quem está acompanhando
-
-        const data = {
-            name: result.name,
-            state: result.state
+        if (result.length === 0) {
+            throw new dataNotFound('cidade', 'nome')
         }
         
-        return data
+        console.log(result[0])
+        
+        return result
     }, 
-    async consultState(state) { //consultar city pelo id
+    async consultState(state) { //consultar city pelo estado
         const result = await Model.findAll({
             where: {
                 state: state
             }, raw: true
         })
 
-        if (!result) {
-            throw new Error('Não foi encontrado cidades, com este estado')
+        if (result.length === 0) {
+            throw new dataNotFound('cidade', 'estado')
         }
-
+        
+        console.log(result[0])
+        
         return result
     }
     //funções da rota

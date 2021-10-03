@@ -1,4 +1,5 @@
 const TableCity = require('./TableCity')
+const invalidData = require('../../errors/invalidData')
 
 class City {
     constructor({name, state}) {
@@ -6,8 +7,18 @@ class City {
         this.state = state
     }
 
+    validate() {
+        if(typeof this.name !== 'string' || this.name.length === 0) {
+            throw new invalidData('name')
+        }
+        if(typeof this.state !== 'string' || this.state.length === 0) {
+            throw new invalidData('state')
+        }
+    }
+
     async register () {
         console.log(this.name)
+        this.validate()
         const result = await TableCity.register({
             name: this.name,
             state: this.state

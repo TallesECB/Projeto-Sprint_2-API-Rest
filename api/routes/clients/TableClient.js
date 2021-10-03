@@ -1,5 +1,6 @@
 const Model = require('./ModelTabelClients')
 const instancia = require('../../database')
+const dataNotFound = require('../../errors/dataNotFound')
 
 module.exports = {
     register(client) { //cadastrar cliente
@@ -7,14 +8,18 @@ module.exports = {
         return Model.create(client)
     }, 
     async consultName(name) { //consultar cliente pelo nome. (em produção)
-        return Model.findAll({raw: true})
+        const result = await Model.findAll({
+            where: {
+                name: name
+            }, raw: true
+        })
 
-        //tentando ajeitar o retorno de dados, para após ativar o if condicional de erro
-
-        if (!result) {
-            throw new Error('Não foi encontrado clientes, com este nome')
+        if (result.length === 0) {
+            throw new dataNotFound('cliente', 'nome')
         }
-
+        
+        console.log(result[0])
+        
         return result
     }, 
     async consultId(id) { //consultar cliente pelo id
@@ -25,7 +30,7 @@ module.exports = {
         })
 
         if (!result) {
-            throw new Error('Não foi encontrado cliente, com este ID')
+            throw new dataNotFound('cliente', 'id')
         }
 
         return result
