@@ -1,28 +1,24 @@
-const Sequelize = require('sequelize') //require para o metodo sequelize, para utiliza-lo pra criação de databases e tabelas
-const instancia = require('../../database') //acessando a instancia, para passar a definição de tabela q eu desejo ter
+const Sequelize = require('sequelize') 
+const instancia = require('../../database') 
 
 const columns = {
-    name: { //colunas da tabela, nome completo
-        type: Sequelize.STRING, //tipo string
-        allowNull: false //e ela precisa estar preenchida
+    name: { 
+        type: Sequelize.STRING, 
+        allowNull: false 
     },
-    gender: { //colunas da tabela, genero
-        type: Sequelize.STRING, //tipo string
-        allowNull: false //e ela precisa estar preenchida
+    gender: { 
+        type: Sequelize.STRING, 
+        allowNull: false 
     },
-    city: { //colunas da tabela, cidade
-        type: Sequelize.STRING, //tipo string
-        allowNull: false //e ela precisa estar preenchida
+    city: { 
+        type: Sequelize.STRING, 
+        allowNull: false 
     }
 }
 
-const options = { //opções do banco, como se eu quero congelar e não alterar mais o nome, e nomear o nome dela no mysql
+const options = { 
     freezeTableName: true,
     tableName: 'Clients'
 }
 
-module.exports = instancia.define('client', columns, options) //definindo a instancia de criação do banco de dados
-
-
-
-//modelo da tabela
+module.exports = instancia.define('client', columns, options) 

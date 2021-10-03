@@ -2,8 +2,6 @@ const router = require('express').Router()
 const TableClient = require('./TableClient')
 const Client = require('./Client')
 
-
-
 router.post('/', async (request, answer) => {
     try {
         const clientdata = request.body
@@ -24,7 +22,6 @@ router.post('/', async (request, answer) => {
 })
 
 router.get('/:idClient', async (request, answer) => {
-    console.log(request.params) 
     try {
         const id = request.params.idClient
         const client = new Client({id: id})
@@ -45,13 +42,9 @@ router.get('/:idClient', async (request, answer) => {
 }) 
 
 router.get('/consultName/:nameClient', async (request, answer) => {
-    console.log(request.params) 
     try {
-        console.log(request.params) 
         const name = request.params.nameClient
         const results = await TableClient.consultName(name)
-
-        console.log(results)
 
         answer.status(200)
         answer.send (
@@ -69,8 +62,6 @@ router.get('/consultName/:nameClient', async (request, answer) => {
 }) 
 
 router.put('/:idClient', async (request, answer) => {
-    console.log(request.params)
-    console.log(request.body) 
     try {
         const data = Object.assign(
             request.body,
@@ -78,7 +69,6 @@ router.put('/:idClient', async (request, answer) => {
                 id: request.params.idClient
             }
         )
-        console.log(JSON.stringify(data))
 
         const client = new Client(data)
 
@@ -104,12 +94,10 @@ router.delete('/:idClient', async (request, answer) => {
         id: request.params.idClient
     }
     const client = new Client(idClient)
-    console.log(idClient)
     
     await client.remove()
     answer.status(204)
     answer.end()
 })
-//rota
 
 module.exports = router

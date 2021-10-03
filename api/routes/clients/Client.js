@@ -25,7 +25,6 @@ class Client {
     } 
 
     async register () {
-        console.log('teste')
         this.validate()
         const result = await TableClient.register({
             name: this.name,
@@ -75,6 +74,5 @@ class Client {
     }
 }
 
-module.exports = Client //exportando a função de cliente
+module.exports = Client 
 
-//metodos da rota

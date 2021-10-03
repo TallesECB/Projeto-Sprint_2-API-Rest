@@ -4,15 +4,10 @@ const dataNotFound = require('../../errors/dataNotFound')
 
 module.exports = {
 
-    register(city) { //cadastrar city
-        console.log('teste')
+    register(city) { 
         return Model.create(city)
     }, 
-    
-
-    //função não está retornando os valores corretamente, necessário verificar, se por um findOne, vai certinho, mas precisamos que seja all, 
-    //pois pode ter mais de uma cidade com o mesmo nome / estado
-    async consultName(name) { //consultar city pelo nome.
+    async consultName(name) { 
         const result = await Model.findAll({
             where: {
                 name: name
@@ -23,11 +18,9 @@ module.exports = {
             throw new dataNotFound('cidade', 'nome')
         }
         
-        console.log(result[0])
-        
         return result
     }, 
-    async consultState(state) { //consultar city pelo estado
+    async consultState(state) { 
         const result = await Model.findAll({
             where: {
                 state: state
@@ -38,9 +31,6 @@ module.exports = {
             throw new dataNotFound('cidade', 'estado')
         }
         
-        console.log(result[0])
-        
         return result
     }
-    //funções da rota
 }
