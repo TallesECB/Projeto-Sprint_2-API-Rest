@@ -29,6 +29,7 @@ router.get('/consultName/:nameCity', async (request, answer) => {
         const city = new City({name: name})
 
         await city.consultName()
+        console.log(city)
         answer.status(200)
         answer.send(
             JSON.stringify(city)

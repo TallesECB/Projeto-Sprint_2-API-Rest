@@ -20,8 +20,15 @@ module.exports = {
         if (!result) {
             throw new Error('Não foi encontrado cidades, com este nome')
         }
+        const teste = JSON.stringify(result)
+        console.log(teste) //necessário executar o tratamento de dados, para concertar o erro do print dos dados, mas preciso dormir, boa noite pra quem está acompanhando
 
-        return result
+        const data = {
+            name: result.name,
+            state: result.state
+        }
+        
+        return data
     }, 
     async consultState(state) { //consultar city pelo id
         const result = await Model.findAll({
