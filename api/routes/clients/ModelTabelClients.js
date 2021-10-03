@@ -2,7 +2,7 @@ const Sequelize = require('sequelize') //require para o metodo sequelize, para u
 const instancia = require('../../database') //acessando a instancia, para passar a definição de tabela q eu desejo ter
 
 const columns = {
-    nameComplet: { //colunas da tabela, nome completo
+    name: { //colunas da tabela, nome completo
         type: Sequelize.STRING, //tipo string
         allowNull: false //e ela precisa estar preenchida
     },
@@ -16,7 +16,7 @@ const columns = {
     }
 }
 
-const options = { //opções do banco, como se eu quero freezar algum nome, e se sim qual o nome da tabela
+const options = { //opções do banco, como se eu quero congelar e não alterar mais o nome, e nomear o nome dela no mysql
     freezeTableName: true,
     tableName: 'Clients'
 }

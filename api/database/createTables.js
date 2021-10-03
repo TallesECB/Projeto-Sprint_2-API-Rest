@@ -10,4 +10,5 @@ async function createTables () {
     }
 }
 
-createTables() //chamando a função para criar as tabelas, como elas tem o if not exists, ela só é criada, caso ainda não exista
+createTables() //chamando a função para criar as tabelas, como elas tem o if not exists, ela só é criada, caso ainda não exista 
+
